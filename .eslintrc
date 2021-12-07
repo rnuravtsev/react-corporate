@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "react-app"
+  ],
+  "rules": {
+    "no-console": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-underscore-dangle": "off"
+  }
+}
