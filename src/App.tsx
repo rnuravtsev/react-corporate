@@ -1,16 +1,16 @@
-import {Header} from './components/Header/Header';
+import { Header } from './components/Header/Header';
 import './App.css';
-import {Footer} from "./components/Footer/Footer";
-import {Main} from "./components/Main/Main";
+import 'normalize.css/normalize.css';
+import { Footer } from "./components/Footer/Footer";
+import { Main } from "./components/Main/Main";
+import {withMainContext} from "./providers/withMainContext";
 
-function App() {
-  return (
-    <div className="app root_container">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
-  );
-}
+const AppPageContent = () => (
+  <div className="app root_container">
+    <Header />
+    <Main />
+    <Footer />
+  </div>
+);
 
-export default App;
+export default  withMainContext(AppPageContent);
