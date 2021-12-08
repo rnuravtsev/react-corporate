@@ -1,5 +1,6 @@
 import { Header } from './components/Header/Header';
 import './App.css';
+import 'normalize.css/normalize.css';
 import { Footer } from "./components/Footer/Footer";
 import { Main } from "./components/Main/Main";
 

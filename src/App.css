@@ -1,3 +1,11 @@
+body {
+  min-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .app {
   text-align: center;
 }
@@ -9,7 +17,6 @@
   border: 1px solid red;
   height: 100vh;
   padding: 2rem 0;
-  box-sizing: border-box;
 }
 
 
