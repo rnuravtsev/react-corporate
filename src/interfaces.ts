@@ -12,3 +12,6 @@ export interface IMainContext {
   chosenAnswersStore: IChosenAnswers,
   setChosenAnswersStore: React.Dispatch<React.SetStateAction<IChosenAnswers>>
 }
+
+export interface ICardProps {
+}
