@@ -5,7 +5,7 @@ export type TAnswer = {
   title: string
 }
 
-export type TQuestions = {
+export type TQuestion = {
   question: {
     id: number,
     text: string,

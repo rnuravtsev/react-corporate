@@ -1,7 +1,7 @@
-import { TQuestions} from "../types";
+import { TQuestion} from "../types";
 
 
-export const questions : TQuestions[] = [
+export const questions : TQuestion[] = [
   {
     question: {
       id: 1,
