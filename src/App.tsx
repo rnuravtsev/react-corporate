@@ -6,10 +6,12 @@ import { Main } from "./components/Main/Main";
 import {withMainContext} from "./providers/withMainContext";
 
 const AppPageContent = () => (
-  <div className="app root_container">
-    <Header />
-    <Main />
-    <Footer />
+  <div className="app">
+    <div className="container">
+      <Header />
+      <Main />
+      <Footer />
+    </div>
   </div>
 );
 

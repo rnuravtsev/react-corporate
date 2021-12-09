@@ -1,5 +1,16 @@
+:root {
+  --app-bg-color: #f6ede1;
+  --button-bg-color: #bb4bf5;
+  --answer-bg-color: #e0d1ba;
+  --answer-border-color: #c0bfbf;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: white;
+  min-width: 320px;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

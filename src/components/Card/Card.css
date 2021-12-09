@@ -6,7 +6,7 @@
 
 .card_question {
   padding: 0 1rem 2rem;
-  border-bottom: 1px solid #c0bfbf;
+  border-bottom: 1px solid var(--answer-border-color);
   font-size: 2rem;
   line-height: 3rem;
 }
@@ -19,7 +19,7 @@
 
 .answers-list_item {
   display: flex;
-  border-bottom: 1px solid #c0bfbf;
+  border-bottom: 1px solid var(--answer-border-color);
 }
 
 .answer-variant-lighter {
@@ -37,29 +37,33 @@
 }
 
 .answers-list_button:hover {
-  background-color: #e0d1ba;
+  background-color: var(--answer-bg-color);
 }
 
 .selected {
-  background-color: #e0d1ba;
+  background-color: var(--answer-bg-color);
 }
 
 .card_next-step-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
   max-width: 80%;
   min-height: 3rem;
-  border: 1px solid #a01ce5;
-  border-radius: 1rem;
-  background-color: #bb4bf5;
+  border: 1px solid var(--button-bg-color);
+  border-radius: 0.5rem;
+  background-color: var(--button-bg-color);
+  transition: all .25s ease;
   cursor: pointer;
 }
 
 .card_next-step-button:hover {
-  box-shadow: 0 0 10px #7c11c4;
+  opacity: 0.85;
 }
 
 .card_next-step-button:active {
-  box-shadow: none;
+  box-shadow: 0 0 0 2px var(--button-bg-color);
 }
 
 @media screen and (max-width: 520px) {
