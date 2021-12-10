@@ -1,0 +1,47 @@
+.card {
+  padding: 1rem 0;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 1rem;
+}
+
+.card__title {
+  padding: 1rem;
+  margin: 0;
+  font-size: 1rem;
+  font-family: 'PT Serif', serif;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--answer-border-color);
+}
+
+.card__answers {
+  margin-bottom: 2rem;
+}
+
+.card__button {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem;
+  display: block;
+  width: 100%;
+  max-width: 90%;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid var(--button-next-bg-color);
+  border-radius: 0.5rem;
+  background-color: var(--button-next-bg-color);
+  transition: all .25s ease;
+  cursor: pointer;
+}
+
+.card__button:hover {
+  opacity: 0.85;
+}
+
+.card__button:active {
+  box-shadow: 0 0 0 2px var(--button-next-bg-color);
+}
+
+

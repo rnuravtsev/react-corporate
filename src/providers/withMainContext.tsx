@@ -1,4 +1,3 @@
-import {questions} from '../configs/questions';
 import React, {createContext, useState} from 'react';
 import {chosenAnswers} from "../configs/chosenAnswers";
 import {IChosenAnswers, IMainContext} from "../interfaces";
