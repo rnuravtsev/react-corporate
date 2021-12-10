@@ -6,6 +6,8 @@
   --answer-border-color: #efefef;
   --answer-wrong-color: #e74128;
   --answer-correct-color: #52b358;
+  --main-text: #1d1d20;
+  --gray-text: #9c9c9c;
 }
 
 * {
@@ -15,6 +17,7 @@
 body {
   min-width: 320px;
   font-size: 16px;
+  color: var(--main-text);
   font-family: 'PT Serif', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
