@@ -1,106 +1,47 @@
 .card {
   padding: 1rem 0;
-  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
   border-radius: 1rem;
 }
 
-.card_question {
-  padding: 0 1rem 2rem;
-  border-bottom: 1px solid var(--answer-border-color);
-  font-size: 2rem;
-  line-height: 3rem;
-}
-
-.card_answers-list {
-  list-style: none;
-  margin: 0 0 2rem;
-  padding: 0;
-}
-
-.answers-list_item {
-  display: flex;
+.card__title {
+  padding: 1rem;
+  margin: 0;
+  font-size: 1rem;
+  font-family: 'PT Serif', serif;
+  line-height: 1.5;
   border-bottom: 1px solid var(--answer-border-color);
 }
 
-.answer-variant-lighter {
-  width: 3px;
+.card__answers {
+  margin-bottom: 2rem;
 }
 
-.answers-list_button {
-  width: 100%;
-  font-size: 2rem;
-  min-height: 4rem;
-  background-color: transparent;
-  cursor: pointer;
-  border-style: none;
-  transition: all 0.25s ease-in-out;
-}
-
-.answers-list_button:hover {
-  background-color: var(--answer-bg-color);
-}
-
-.selected {
-  background-color: var(--answer-bg-color);
-}
-
-.card_next-step-button {
-  display: block;
+.card__button {
   margin-left: auto;
   margin-right: auto;
+  padding: 0.5rem;
+  display: block;
   width: 100%;
-  max-width: 80%;
-  min-height: 3rem;
-  border: 1px solid var(--button-bg-color);
+  max-width: 90%;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 1px solid var(--button-next-bg-color);
   border-radius: 0.5rem;
-  background-color: var(--button-bg-color);
+  background-color: var(--button-next-bg-color);
   transition: all .25s ease;
   cursor: pointer;
 }
 
-.card_next-step-button:hover {
+.card__button:hover {
   opacity: 0.85;
 }
 
-.card_next-step-button:active {
-  box-shadow: 0 0 0 2px var(--button-bg-color);
+.card__button:active {
+  box-shadow: 0 0 0 2px var(--button-next-bg-color);
 }
-
-@media screen and (max-width: 520px) {
-  .card_question {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    padding: 0 0.5rem 1rem;
-  }
-
-  .answers-list_button {
-    min-height: 2.5rem;
-    font-size: 1rem;
-  }
-
-  .card_next-step-button {
-    min-height: 2rem;
-    border-radius: 1rem;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .card_question {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    padding: 0 0.5rem 1rem;
-  }
-
-  .answers-list_button {
-    min-height: 2rem;
-    font-size: 1rem;
-  }
-
-  .card_next-step-button {
-    min-height: 2rem;
-    border-radius: 1rem;
-  }
-}
-
 
 

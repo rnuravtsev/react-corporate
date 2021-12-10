@@ -2,13 +2,12 @@ export type TAnswer = {
   id: number,
   text: string,
   isCorrect: boolean,
-  title: string
+  hint: string,
+  percent: number,
 }
 
 export type TQuestion = {
-  question: {
-    id: number,
-    text: string,
-  },
+  id: number,
+  title: string,
   answers: TAnswer[],
 }
