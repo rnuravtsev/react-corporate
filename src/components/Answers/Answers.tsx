@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Answers.css';
 import { TQuestion } from "../../types";
 import AnswersItem from "../AnswersItem/AnswersItem";
+import classNames from "classnames";
 
 interface IAnswersProps {
   questions: TQuestion[],
@@ -9,7 +10,7 @@ interface IAnswersProps {
 
 const Answers: React.FC<IAnswersProps> = ({questions}) => {
   return (
-    <ul className="answers">
+    <ul className={classNames("answers")}>
       {questions.map((el) => {
         const {id, answers} = el;
         return answers.map((answer) => {
