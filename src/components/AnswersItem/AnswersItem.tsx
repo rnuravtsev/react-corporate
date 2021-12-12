@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../../images/checkmark.svg';
-import '../../images/cross.svg';
+import {ReactComponent as CheckmarkIcon} from '../../images/checkmark.svg';
+import {ReactComponent as CrossIcon} from '../../images/cross.svg';
 import classNames from 'classnames';
 
 interface IAnswersItem {
@@ -20,6 +20,8 @@ const AnswersItem: React.FC<IAnswersItem> = ({isCorrect, text, hint, percent})  
     <li className={classNames("answers__item", {"answers__item_correct": selected && isCorrect}, {"answers__item_wrong": selected && !isCorrect})}>
       {selected && (
         <span className="answers__percentage">
+          <CheckmarkIcon className="answers__icon answers__icon_checkmark" width={24} height={24}/>
+          <CrossIcon className="answers__icon answers__icon_cross" width={10} height={10}/>
           {percent}%
         </span>
       )}

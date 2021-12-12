@@ -14,7 +14,14 @@
   box-sizing: border-box;
 }
 
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
+  /* Для изогнутых экранов */
+  padding: 0 10px;
   min-width: 320px;
   font-size: 16px;
   color: var(--main-text);

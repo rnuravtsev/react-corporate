@@ -10,6 +10,7 @@ interface ICardProps {
 export const Card: React.FC<ICardProps> = ({questions}) => {
   return (
     <div className="card">
+      <div className="card__number">1/8</div>
       <h3 className="card__title">
         {questions[0].title}
       </h3>
