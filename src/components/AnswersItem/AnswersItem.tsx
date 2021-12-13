@@ -1,33 +1,34 @@
 import React, { useState } from 'react';
-import '../../images/checkmark.svg';
-import '../../images/cross.svg';
+import {ReactComponent as CheckmarkIcon} from '../../images/checkmark.svg';
+import {ReactComponent as CrossIcon} from '../../images/cross.svg';
 import classNames from 'classnames';
 
 interface IAnswersItem {
   text: string,
   isCorrect: boolean,
-  hint: string,
+  comment: string,
   percent: number,
 }
 
-
-const AnswersItem: React.FC<IAnswersItem> = ({isCorrect, text, hint, percent})  => {
+const AnswersItem: React.FC<IAnswersItem> = ({isCorrect, text, comment, percent})  => {
   const [selected, setSelected] = useState(false);
+
   const onButtonClick = () => {
     setSelected(true);
   };
+
   return (
     <li className={classNames("answers__item", {"answers__item_correct": selected && isCorrect}, {"answers__item_wrong": selected && !isCorrect})}>
       {selected && (
         <span className="answers__percentage">
+          <CheckmarkIcon className="answers__icon answers__icon_checkmark" width={24} height={24}/>
+          <CrossIcon className="answers__icon answers__icon_cross" width={10} height={10}/>
           {percent}%
         </span>
       )}
-      <button className={"answers__button"} type="button" onClick={onButtonClick}>{text}</button>
+      <button className="answers__button" type="button" onClick={onButtonClick}>{text}</button>
       {selected && (
-        <div className="answers__info">
-          <span className="answers__hint">{hint}</span>
-        </div>
+        <span className="answers__hint">{comment}</span>
       )}
     </li>
 

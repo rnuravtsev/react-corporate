@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Card.css';
-import Answers from "../Answers/Answers";
-import {TQuestion} from "../../types";
+import Answers from '../Answers/Answers';
+import { useFetchQuestion } from '../../hooks/useFetchQuestion';
+import { MainContext } from '../../providers/withMainContext';
+import { increaseQuestionNumber } from '../../store/actions';
+import { MAX_NUMBER_QUESTIONS } from '../../consts';
 
-interface ICardProps {
-  questions: TQuestion[],
-}
+export const Card = () => {
+  const { state, dispatch } = useContext(MainContext);
+  const { questionNumber } = state;
 
-export const Card: React.FC<ICardProps> = ({questions}) => {
+  const response = useFetchQuestion(
+    `http://localhost:4000/api/question`,
+    questionNumber
+  );
+
+  const { data, error, isLoading } = response;
+
+  const onButtonClick = () => {
+    dispatch(increaseQuestionNumber());
+  };
+
   return (
     <div className="card">
-      <h3 className="card__title">
-        {questions[0].title}
-      </h3>
-      <div className="card__answers">
-        <Answers questions={questions} />
+      <div className="card__number">
+        {questionNumber}/{MAX_NUMBER_QUESTIONS}
       </div>
-      <button className="card__button" type="button">Дальше</button>
+      <h3 className="card__title">{data?.title}</h3>
+      <div className="card__answers">
+        <Answers answers={data?.answers} />
+      </div>
+      {questionNumber < MAX_NUMBER_QUESTIONS ? (
+        <button className="card__button" type="button" onClick={onButtonClick}>
+          Дальше
+        </button>
+      ) : (
+        <button className="card__button" type="button" onClick={onButtonClick}>
+          Показать результат
+        </button>
+      )}
     </div>
   );
 };

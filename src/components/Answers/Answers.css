@@ -11,8 +11,6 @@
   border-bottom: 1px solid var(--answer-border-color);
 }
 
-.answers__item:hover,
-.answers__item:focus,
 .answers__item:active {
   background-color: var(--answer-active-bg-color);
 }
@@ -57,14 +55,21 @@
   cursor: pointer;
 }
 
-.answers__button:hover {
-  opacity: 0.75;
-}
-
 .answers__percentage {
+  display: flex;
+  gap: 5px;
+  align-items: center;
   font-weight: 700;
 }
 
 .answers__hint {
   font-size: 14px;
+}
+
+.answers__icon_checkmark {
+  fill: var(--answer-correct-color);
+}
+
+.answers__icon_cross {
+  fill: var(--answer-wrong-color);
 }

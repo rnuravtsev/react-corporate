@@ -4,6 +4,13 @@
   border-radius: 1rem;
 }
 
+.card__number {
+  padding: 0 1rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--gray-text);
+}
+
 .card__title {
   padding: 1rem;
   margin: 0;
