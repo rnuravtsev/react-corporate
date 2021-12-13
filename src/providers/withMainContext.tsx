@@ -1,28 +1,29 @@
-import React, {createContext, useState} from 'react';
-import {chosenAnswers} from "../configs/chosenAnswers";
-import {IChosenAnswers, IMainContext} from "../interfaces";
+import React, {createContext, useReducer} from 'react';
+import {reducer} from "../store/store";
 
-const initialMainContext: IMainContext = {
-  totalPlayersQuantity: 0,
-  setTotalPlayersQuantity: () => {},
-  chosenAnswersStore: chosenAnswers,
-  setChosenAnswersStore: () => {}
+export interface IMainContext {
+  state: {
+    questionNumber: number,
+    numberOfCorrectAnswers: number,
+  },
+  dispatch: React.Dispatch<{type: string; payload?: unknown}>;
+}
+
+const initialMainContext = {
+  questionNumber: 1,
+  numberOfCorrectAnswers: 0,
 };
 
-const MainContext = createContext<IMainContext>(initialMainContext);
+export const MainContext = createContext<IMainContext>({state: initialMainContext, dispatch: () => {}});
 
 export const withMainContext = <P extends Object>(Component: React.ComponentType<P>) => {
   const Wrapper: React.FC<P> = (props: P) => {
-    const [chosenAnswersStore, setChosenAnswersStore] = useState<IChosenAnswers>(chosenAnswers);
-    const [totalPlayersQuantity, setTotalPlayersQuantity] = useState<number>(0);
-
+    const [state, dispatch] = useReducer(reducer, initialMainContext);
     return (
       <MainContext.Provider
         value={{
-          totalPlayersQuantity,
-          setTotalPlayersQuantity,
-          chosenAnswersStore,
-          setChosenAnswersStore,
+          dispatch,
+          state,
         }}
       >
         <Component {...props} />

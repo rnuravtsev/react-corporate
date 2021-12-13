@@ -2,7 +2,7 @@ export type TAnswer = {
   id: number,
   text: string,
   isCorrect: boolean,
-  hint: string,
+  comment: string,
   percent: number,
 }
 
