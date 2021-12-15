@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import {ReactComponent as CheckmarkIcon} from '../../images/checkmark.svg';
 import {ReactComponent as CrossIcon} from '../../images/cross.svg';
 import classNames from 'classnames';
+import {TAnswer} from "../../types";
 
-interface IAnswersItem {
-  text: string,
-  isCorrect: boolean,
-  comment: string,
-  percent: number,
-}
-
-const AnswersItem: React.FC<IAnswersItem> = ({isCorrect, text, comment, percent})  => {
+const AnswersItem: React.FC<TAnswer> = ({id, isCorrect, text, comment, percent})  => {
   const [selected, setSelected] = useState(false);
 
   const onButtonClick = () => {

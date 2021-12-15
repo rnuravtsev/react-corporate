@@ -14,7 +14,7 @@ const Answers: React.FC<IAnswersProps> = ({answers}) => {
     <ul className={classNames("answers")}>
       {answers?.map(answer => {
         const { id, text, isCorrect, comment, percent } = answer;
-        return <AnswersItem key={id} text={text} isCorrect={isCorrect} comment={comment} percent={percent} />;
+        return <AnswersItem key={id} id={id} text={text} isCorrect={isCorrect} comment={comment} percent={percent} />;
       })}
     </ul>
   );

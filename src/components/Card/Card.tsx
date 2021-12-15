@@ -4,18 +4,15 @@ import Answers from '../Answers/Answers';
 import { useFetchQuestion } from '../../hooks/useFetchQuestion';
 import { MainContext } from '../../providers/withMainContext';
 import { increaseQuestionNumber } from '../../store/actions';
-import { MAX_NUMBER_QUESTIONS } from '../../consts';
+import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
 
 export const Card = () => {
   const { state, dispatch } = useContext(MainContext);
   const { questionNumber } = state;
 
-  const response = useFetchQuestion(
-    `http://localhost:4000/api/question`,
-    questionNumber
-  );
+  const fetchResponse = useFetchQuestion(API.getQuestion, questionNumber);
 
-  const { data, error, isLoading } = response;
+  const { data, isLoading } = fetchResponse;
 
   const onButtonClick = () => {
     dispatch(increaseQuestionNumber());
