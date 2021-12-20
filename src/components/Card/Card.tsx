@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './Card.css';
 import Answers from '../Answers/Answers';
 import { useFetchQuestion } from '../../hooks/useFetchQuestion';
 import { MainContext } from '../../providers/withMainContext';
 import { increaseQuestionNumber } from '../../store/actions';
 import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
+import { Result } from '../Result/Result';
 
 export const Card = () => {
   const { state, dispatch } = useContext(MainContext);
@@ -14,9 +15,17 @@ export const Card = () => {
 
   const { data, isLoading } = fetchResponse;
 
+  const [finishClicked, setFinishClicked] = useState(false);
+
   const onButtonClick = () => {
     dispatch(increaseQuestionNumber());
   };
+
+  if (finishClicked) {
+    return (
+      <Result />
+    );
+  }
 
   return (
     <div className="card">
@@ -32,7 +41,7 @@ export const Card = () => {
           Дальше
         </button>
       ) : (
-        <button className="card__button" type="button" onClick={onButtonClick}>
+        <button className="card__button" type="button" onClick={() => setFinishClicked(true)}>
           Показать результат
         </button>
       )}

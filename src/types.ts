@@ -11,3 +11,9 @@ export type TQuestion = {
   title: string;
   answers: TAnswer[];
 };
+
+export type TResult = {
+  id: number;
+  title: string;
+  text: string;
+};
