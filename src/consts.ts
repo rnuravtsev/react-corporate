@@ -6,3 +6,8 @@ export enum API {
   postResult = 'https://fun.i-novus.ru/api/result',
 }
 
+export enum APILOCAL {
+  getQuestion = `http://localhost:8080/api/question`,
+  postAnswer = 'http://localhost:8080/api/question',
+  postResult = 'http://localhost:8080/api/result',
+}

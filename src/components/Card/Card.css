@@ -14,7 +14,7 @@
 .card__title {
   padding: 1rem;
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: 'PT Serif', serif;
   line-height: 1.5;
   border-bottom: 1px solid var(--answer-border-color);
@@ -51,4 +51,8 @@
   box-shadow: 0 0 0 2px var(--button-next-bg-color);
 }
 
-
+@media (min-width: 375px) {
+  .card__title {
+    font-size: 1.2rem;
+  }
+}
