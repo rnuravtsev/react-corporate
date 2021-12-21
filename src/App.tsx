@@ -8,9 +8,9 @@ import { withMainContext } from "./providers/withMainContext";
 const AppPageContent = () => (
   <div className="app">
     <div className="container">
-      <Header />
+      {/*<Header />*/}
       <Main />
-      <Footer />
+      {/*<Footer />*/}
     </div>
   </div>
 );

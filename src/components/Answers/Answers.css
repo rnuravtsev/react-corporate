@@ -27,7 +27,7 @@
 /* Correct */
 
 .answers__item_correct {
-  box-shadow: inset 3px 0 0 0 var(--answer-correct-color);
+  box-shadow: inset 3px 0 0 -1px var(--answer-correct-color);
 }
 
 .answers__item_correct .answers__percentage {
@@ -49,7 +49,7 @@
 }
 
 .answers__item_wrong {
-  box-shadow: inset 3px 0 0 0 var(--answer-wrong-color);
+  box-shadow: inset 3px 0 0 -1px var(--answer-wrong-color);
 }
 
 .answers__button {
@@ -70,13 +70,16 @@
 
 .answers__percentage {
   display: flex;
-  gap: 5px;
   align-items: center;
   font-weight: 700;
 }
 
 .answers__comment {
   font-size: 14px;
+}
+
+.answers__icon {
+  margin-right: 5px;
 }
 
 .answers__icon_checkmark {
