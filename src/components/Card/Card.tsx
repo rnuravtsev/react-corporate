@@ -1,14 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './Card.css';
 import Answers from '../Answers/Answers';
-import {MainContext} from '../../providers/withMainContext';
-import {increaseQuestionNumber, resetActiveAnswer, setCorrectAnswer} from '../../store/actions';
-import {API, MAX_NUMBER_QUESTIONS} from '../../consts';
+import { MainContext } from '../../providers/withMainContext';
+import { increaseQuestionNumber, resetActiveAnswer, setCorrectAnswer } from '../../store/actions';
+import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
+import { Result } from '../Result/Result';
 import {TQuestion} from '../../types';
 import axios from 'axios';
 
 export const Card = () => {
   const [question, setQuestion] = useState<TQuestion>();
+  const [finishClicked, setFinishClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const {state, dispatch} = useContext(MainContext);
@@ -58,9 +60,18 @@ export const Card = () => {
   }, [activeAnswerId]);
 
   const onButtonClick = () => {
-    dispatch(increaseQuestionNumber());
-    dispatch(resetActiveAnswer());
+    if (questionId < MAX_NUMBER_QUESTIONS) {
+      dispatch(increaseQuestionNumber());
+      dispatch(resetActiveAnswer());
+    }
+    setFinishClicked(true);
   };
+
+  if (finishClicked) {
+    return (
+      <Result />
+    );
+  }
 
   return (
     <>
