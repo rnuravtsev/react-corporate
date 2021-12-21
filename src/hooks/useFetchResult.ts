@@ -4,7 +4,6 @@ import axios from "axios";
 
 export const useFetchResult = (url: string, correctAnswersCounter: number) => {
   const [data, setData] = useState<TResult>();
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -16,16 +15,19 @@ export const useFetchResult = (url: string, correctAnswersCounter: number) => {
           }
         });
         setData(response.data);
+        setIsLoading(false);
       } catch (err) {
-        setError(String(err));
+        alert(err);
+        setIsLoading(false);
       }
 
     };
 
     fetchData();
 
-    setIsLoading(false);
+    return () => setIsLoading(true);
+
   }, [correctAnswersCounter]);
 
-  return {data, error, isLoading};
+  return {data, isLoading};
 };

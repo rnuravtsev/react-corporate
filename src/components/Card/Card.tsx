@@ -11,7 +11,7 @@ import axios from 'axios';
 export const Card = () => {
   const [question, setQuestion] = useState<TQuestion>();
   const [finishClicked, setFinishClicked] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isQuestionLoading, setIsQuestionLoading] = useState(true);
 
   const {state, dispatch} = useContext(MainContext);
   const {questionId, activeAnswerId} = state;
@@ -25,12 +25,15 @@ export const Card = () => {
           params: {questionId},
         });
         setQuestion(response.data);
-        setIsLoading(false);
+        setIsQuestionLoading(false);
       } catch (err) {
         alert(err);
-        setIsLoading(false);
+        setIsQuestionLoading(false);
       }
     })();
+
+    return () => setIsQuestionLoading(true);
+
   }, [questionId]);
 
   useEffect(() => {
@@ -47,13 +50,11 @@ export const Card = () => {
           });
           const data = response.data;
           setQuestion(data);
-          setIsLoading(false);
           if (data.answers[activeAnswerId - 1].isCorrect) {
             dispatch(setCorrectAnswer());
           }
         } catch (err) {
           alert(err);
-          setIsLoading(false);
         }
       })();
     }
@@ -77,7 +78,7 @@ export const Card = () => {
   return (
     <>
       {
-        !isLoading
+        !isQuestionLoading
           ? (<div className="card">
             <div className="card__number">
               {questionId}/{MAX_NUMBER_QUESTIONS}
@@ -94,7 +95,7 @@ export const Card = () => {
               }
             </button>
           </div>)
-          : ('....Loading')
+          : ('Лоудэр...')
       }
     </>
   );

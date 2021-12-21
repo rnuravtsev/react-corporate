@@ -5,18 +5,18 @@ import AnswersItem from "../AnswersItem/AnswersItem";
 import classNames from "classnames";
 
 interface IAnswersProps {
-  answers: TAnswer[] | undefined,
+  answers: TAnswer[] | undefined;
 }
 
 const Answers: React.FC<IAnswersProps> = ({answers}) => {
 
   return (
-    <ul className={classNames("answers")}>
-      {answers?.map(answer => {
-        const { id, text, isCorrect, comment, percent } = answer;
-        return <AnswersItem key={id} id={id} text={text} isCorrect={isCorrect} comment={comment} percent={percent} />;
-      })}
-    </ul>
+   <ul className={classNames("answers")}>
+     {answers?.map(answer => {
+       const { id, text, isCorrect, comment, percent } = answer;
+       return <AnswersItem key={id} id={id} text={text} isCorrect={isCorrect} comment={comment} percent={percent} />;
+     })}
+   </ul>
   );
 };
 
