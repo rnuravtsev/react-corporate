@@ -63,8 +63,9 @@ export const Card = () => {
     if (questionId < MAX_NUMBER_QUESTIONS) {
       dispatch(increaseQuestionNumber());
       dispatch(resetActiveAnswer());
+    } else {
+      setFinishClicked(true);
     }
-    setFinishClicked(true);
   };
 
   if (finishClicked) {
