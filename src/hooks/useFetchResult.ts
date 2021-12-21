@@ -1,18 +1,18 @@
 import {useState, useEffect} from "react";
-import {TQuestion} from "../types";
+import { TResult } from "../types";
 import axios from "axios";
 
-export const useFetchQuestion = (url: string, questionId: number) => {
-  const [data, setData] = useState<TQuestion>();
+export const useFetchResult = (url: string, correctAnswersCounter: number) => {
+  const [data, setData] = useState<TResult>();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<TQuestion>(url, {
+        const response = await axios.get<TResult>(url, {
           params: {
-            questionId
+            correctAnswersCounter
           }
         });
         setData(response.data);
@@ -25,7 +25,7 @@ export const useFetchQuestion = (url: string, questionId: number) => {
     fetchData();
 
     setIsLoading(false);
-  }, [questionId]);
+  }, [correctAnswersCounter]);
 
   return {data, error, isLoading};
 };

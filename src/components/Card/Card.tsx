@@ -1,44 +1,101 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Card.css';
 import Answers from '../Answers/Answers';
-import { useFetchQuestion } from '../../hooks/useFetchQuestion';
 import { MainContext } from '../../providers/withMainContext';
-import { increaseQuestionNumber } from '../../store/actions';
-import { MAX_NUMBER_QUESTIONS } from '../../consts';
+import { increaseQuestionNumber, resetActiveAnswer, setCorrectAnswer } from '../../store/actions';
+import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
+import { Result } from '../Result/Result';
+import {TQuestion} from '../../types';
+import axios from 'axios';
 
 export const Card = () => {
-  const { state, dispatch } = useContext(MainContext);
-  const { questionNumber } = state;
+  const [question, setQuestion] = useState<TQuestion>();
+  const [finishClicked, setFinishClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const response = useFetchQuestion(
-    `http://localhost:4000/api/question`,
-    questionNumber
-  );
+  const {state, dispatch} = useContext(MainContext);
+  const {questionId, activeAnswerId} = state;
 
-  const { data, error, isLoading } = response;
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: API.getQuestion,
+          params: {questionId},
+        });
+        setQuestion(response.data);
+        setIsLoading(false);
+      } catch (err) {
+        alert(err);
+        setIsLoading(false);
+      }
+    })();
+  }, [questionId]);
+
+  useEffect(() => {
+    if (activeAnswerId) {
+      (async () => {
+        try {
+          const response = await axios({
+            method: 'post',
+            url: API.postAnswer,
+            data: {
+              questionId,
+              answerId: activeAnswerId,
+            },
+          });
+          const data = response.data;
+          setQuestion(data);
+          setIsLoading(false);
+          if (data.answers[activeAnswerId - 1].isCorrect) {
+            dispatch(setCorrectAnswer());
+          }
+        } catch (err) {
+          alert(err);
+          setIsLoading(false);
+        }
+      })();
+    }
+  }, [activeAnswerId]);
 
   const onButtonClick = () => {
-    dispatch(increaseQuestionNumber());
+    if (questionId < MAX_NUMBER_QUESTIONS) {
+      dispatch(increaseQuestionNumber());
+      dispatch(resetActiveAnswer());
+    } else {
+      setFinishClicked(true);
+    }
   };
 
+  if (finishClicked) {
+    return (
+      <Result />
+    );
+  }
+
   return (
-    <div className="card">
-      <div className="card__number">
-        {questionNumber}/{MAX_NUMBER_QUESTIONS}
-      </div>
-      <h3 className="card__title">{data?.title}</h3>
-      <div className="card__answers">
-        <Answers answers={data?.answers} />
-      </div>
-      {questionNumber < MAX_NUMBER_QUESTIONS ? (
-        <button className="card__button" type="button" onClick={onButtonClick}>
-          Дальше
-        </button>
-      ) : (
-        <button className="card__button" type="button" onClick={onButtonClick}>
-          Показать результат
-        </button>
-      )}
-    </div>
+    <>
+      {
+        !isLoading
+          ? (<div className="card">
+            <div className="card__number">
+              {questionId}/{MAX_NUMBER_QUESTIONS}
+            </div>
+            <h3 className="card__title">{question?.title}</h3>
+            <div className="card__answers">
+              <Answers answers={question?.answers}/>
+            </div>
+            <button className="card__button" type="button" onClick={onButtonClick}>
+              {
+                questionId < MAX_NUMBER_QUESTIONS
+                  ? 'Дальше'
+                  : 'Показать результат'
+              }
+            </button>
+          </div>)
+          : ('....Loading')
+      }
+    </>
   );
 };

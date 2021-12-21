@@ -1,17 +1,19 @@
 import React, {createContext, useReducer} from 'react';
-import {reducer} from "../store/store";
+import {reducer} from "../store/reducer";
 
 export interface IMainContext {
   state: {
-    questionNumber: number,
+    questionId: number,
     numberOfCorrectAnswers: number,
+    activeAnswerId: number | null,
   },
   dispatch: React.Dispatch<{type: string; payload?: unknown}>;
 }
 
 const initialMainContext = {
-  questionNumber: 1,
+  questionId: 1,
   numberOfCorrectAnswers: 0,
+  activeAnswerId: null,
 };
 
 export const MainContext = createContext<IMainContext>({state: initialMainContext, dispatch: () => {}});
