@@ -2,10 +2,10 @@
   padding: 15px;
   display: flex;
   border-radius: 5px;
-  background-image: radial-gradient(circle at 100% 100%, transparent 16px, #b71ecd 16px, #b71ecd 20px, transparent 20px), linear-gradient(to right, #b71ecd, #e0d1ba), radial-gradient(circle at 0% 100%, transparent 16px, #e0d1ba 16px, #e0d1ba 20px, transparent 20px), linear-gradient(to bottom, #e0d1ba, #b61ecd), radial-gradient(circle at 0% 0%, transparent 16px, #b61ecd 16px, #b61ecd 20px, transparent 20px), linear-gradient(to left, #b61ecd, #e0d1ba), radial-gradient(circle at 100% 0%, transparent 16px, #e0d1ba 16px, #e0d1ba 20px, transparent 20px), linear-gradient(to top, #e0d1ba, #b71ecd);
-  background-size: 20px 20px, calc(100% - 40px) 4px, 20px 20px, 4px calc(100% - 40px);
+  background-image: radial-gradient(circle at 100% 100%, transparent 15px, #743ad5 15px, #743ad5 20px, transparent 20px), linear-gradient(to right, #743ad5, #d53a9d), radial-gradient(circle at 0% 100%, transparent 15px, #d53a9d 15px, #d53a9d 20px, transparent 20px), linear-gradient(to bottom, #d53a9d, #743ad5), radial-gradient(circle at 0% 0%, transparent 15px, #743ad5 15px, #743ad5 20px, transparent 20px), linear-gradient(to left, #743ad5, #d53a9d), radial-gradient(circle at 100% 0%, transparent 15px, #d53a9d 15px, #d53a9d 20px, transparent 20px), linear-gradient(to top, #d53a9d, #743ad5);
+  background-size: 20px 20px, calc(100% - 40px) 5px, 20px 20px, 5px calc(100% - 40px);
   background-position: top left,top center,top right,center right, bottom right,bottom center,bottom left,center left;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
 }
 
 .result__title {
