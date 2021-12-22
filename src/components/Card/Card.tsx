@@ -7,6 +7,7 @@ import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
 import { Result } from '../Result/Result';
 import {TQuestion} from '../../types';
 import axios from 'axios';
+import {debounce} from "../../debounce";
 
 export const Card = () => {
   const [question, setQuestion] = useState<TQuestion>();
@@ -87,7 +88,7 @@ export const Card = () => {
             <div className="card__answers">
               <Answers answers={question?.answers}/>
             </div>
-            <button className="card__button" type="button" onClick={onButtonClick}>
+            <button className="card__button" type="button" onClick={debounce(onButtonClick, 1000)}>
               {
                 questionId < MAX_NUMBER_QUESTIONS
                   ? 'Дальше'

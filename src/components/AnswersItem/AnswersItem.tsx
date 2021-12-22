@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import {TAnswer} from '../../types';
 import {MainContext} from '../../providers/withMainContext';
 import {setActiveAnswer} from '../../store/actions';
+import {debounce} from "../../debounce";
 
 const AnswersItem: React.FC<TAnswer> = ({
                                           id: answerId,
@@ -87,7 +88,7 @@ const AnswersItem: React.FC<TAnswer> = ({
       <button
         className="answers__button"
         type="button"
-        onClick={onButtonClick}
+        onClick={debounce(onButtonClick)}
         disabled={!!activeAnswerId}
       >
         {text}
