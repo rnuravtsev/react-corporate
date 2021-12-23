@@ -48,12 +48,21 @@
   border: 1px solid var(--disabled-color);
 }
 
+.card__button--disabled {
+  background-color: var(--disabled-color);
+  border: 1px solid var(--disabled-color);
+}
+
 .card__button:hover {
   opacity: 0.85;
 }
 
 .card__button:active {
   box-shadow: 0 0 0 2px var(--button-next-bg-color);
+}
+
+.card__button--disabled:hover {
+  opacity: 1;
 }
 
 @media (min-width: 375px) {

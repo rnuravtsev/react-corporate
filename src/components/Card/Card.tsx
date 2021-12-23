@@ -25,6 +25,25 @@ export const Card = () => {
   const { questionId, activeAnswerId } = state;
 
   useEffect(() => {
+    if (questionId < MAX_NUMBER_QUESTIONS) {
+      const onDocumentClick = () => {
+        dispatch(increaseQuestionNumber());
+        dispatch(resetActiveAnswer());
+      };
+      if (activeAnswerId) {
+        document.addEventListener('click', onDocumentClick);
+      }
+      if (nextButtonActive) {
+        document.removeEventListener('click', onDocumentClick);
+      }
+
+      return () => {
+        document.removeEventListener('click', onDocumentClick);
+      };
+    }
+  },[activeAnswerId, nextButtonActive]);
+
+  useEffect(() => {
     (async () => {
       try {
         const response = await axios({
@@ -65,21 +84,6 @@ export const Card = () => {
         }
       })();
     }
-    if (questionId < MAX_NUMBER_QUESTIONS) {
-      const onDocumentClick = () => {
-        dispatch(increaseQuestionNumber());
-        dispatch(resetActiveAnswer());
-      };
-      if (activeAnswerId) {
-        document.addEventListener('click', onDocumentClick);
-      }
-      if (nextButtonActive) {
-        document.addEventListener('click', onDocumentClick);
-      }
-      return () => {
-        document.removeEventListener('click', onDocumentClick);
-      };
-    }
   },[activeAnswerId]);
 
   const onButtonClick = () => {
@@ -111,8 +115,10 @@ export const Card = () => {
           <button
             className={classNames('card__button', {
               'card__button--loading': isQuestionLoading,
+              'card__button--disabled': !activeAnswerId,
             })}
             type="button"
+            disabled={!activeAnswerId}
             onClick={debounce(onButtonClick)}
             onMouseEnter={() => setNextButtonActive(true)}
             onMouseLeave={() => setNextButtonActive(false)}
