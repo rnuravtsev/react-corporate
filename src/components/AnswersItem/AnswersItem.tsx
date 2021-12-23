@@ -68,7 +68,7 @@ const AnswersItem: React.FC<TAnswer> = ({
       if (!currentAnswer && isCorrect) {
         return renderCheckmarkPercent(percent);
       }
-      if (percent) {
+      if (percent || percent === 0) {
         return <span className="answers__percentage">{percent}%</span>;
       }
     }
@@ -93,7 +93,7 @@ const AnswersItem: React.FC<TAnswer> = ({
       >
         {text}
       </button>
-      {currentAnswer && <span className="answers__hint">{comment}</span>}
+      {currentAnswer && <span className="answers__comment">{comment}</span>}
     </li>
   );
 };
