@@ -4,8 +4,12 @@
   list-style: none;
 }
 
+.answers__zindex {
+  position: relative;
+  z-index: 5;
+}
+
 .answers__item {
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--answer-border-color);
@@ -53,7 +57,7 @@
 }
 
 .answers__button {
-  padding: 1rem 0;
+  padding: 1.5rem 1rem;
   width: 100%;
   font-size: 1rem;
   text-align: left;
@@ -65,16 +69,21 @@
 }
 
 .answers__button:disabled {
+  pointer-events: none;
   cursor: default;
 }
 
 .answers__percentage {
+  padding-top: 1rem;
+  padding-left: 1rem;
   display: flex;
   align-items: center;
   font-weight: 700;
 }
 
 .answers__comment {
+  padding-bottom: 1rem;
+  padding-left: 1rem;
   font-size: 14px;
 }
 

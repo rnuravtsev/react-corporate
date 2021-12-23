@@ -1,4 +1,9 @@
 .result {
+  display: flex;
+  flex-direction: column;
+}
+
+.result__wrapper {
   padding: 15px;
   display: flex;
   border-radius: 5px;
@@ -21,4 +26,25 @@
 .result__content {
   padding-left: 10px;
   border-left: 1px solid var(--main-text);
+}
+
+.result__refresh {
+  margin-top: 30px;
+  display: flex;
+  align-self: center;
+  text-decoration: none;
+}
+
+.result__refresh:hover,
+.result__refresh:active,
+.result__refresh:focus {
+  opacity: 0.75;
+}
+
+.result__refresh:visited {
+  color: var(--main-text);
+}
+
+.result__icon {
+  margin-right: 5px;
 }
