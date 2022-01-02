@@ -24,15 +24,17 @@ export const Card = () => {
   const { state, dispatch } = useContext(MainContext);
   const { questionId, activeAnswerId } = state;
 
+  const onDocumentClick = () => {
+    dispatch(increaseQuestionNumber());
+    dispatch(resetActiveAnswer());
+  };
+
   useEffect(() => {
     if (questionId < MAX_NUMBER_QUESTIONS) {
-      const onDocumentClick = () => {
-        dispatch(increaseQuestionNumber());
-        dispatch(resetActiveAnswer());
-      };
       if (activeAnswerId) {
         document.addEventListener('click', onDocumentClick);
       }
+
       if (nextButtonActive) {
         document.removeEventListener('click', onDocumentClick);
       }
@@ -41,7 +43,7 @@ export const Card = () => {
         document.removeEventListener('click', onDocumentClick);
       };
     }
-  },[activeAnswerId, nextButtonActive]);
+  }, [activeAnswerId, nextButtonActive]);
 
   useEffect(() => {
     (async () => {
@@ -84,7 +86,7 @@ export const Card = () => {
         }
       })();
     }
-  },[activeAnswerId]);
+  }, [activeAnswerId]);
 
   const onButtonClick = () => {
     if (questionId < MAX_NUMBER_QUESTIONS) {

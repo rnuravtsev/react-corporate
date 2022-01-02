@@ -1,3 +1,5 @@
+import {createAction} from "@reduxjs/toolkit";
+
 export enum Actions {
   increaseQuestionNumber = 'INCREASE_QUESTION_NUMBER',
   setActiveAnswer = 'SET_ACTIVE_ANSWER',
@@ -5,19 +7,10 @@ export enum Actions {
   setCorrectAnswer = 'SET_CORRECT_ANSWER',
 }
 
-export const increaseQuestionNumber = () => ({
-  type: Actions.increaseQuestionNumber
-});
+export const increaseQuestionNumber = createAction(Actions.increaseQuestionNumber);
 
-export const setCorrectAnswer = () => ({
-  type: Actions.setCorrectAnswer
-});
+export const setCorrectAnswer = createAction(Actions.setCorrectAnswer);
 
-export const setActiveAnswer = (id: number) => ({
-  type: Actions.setActiveAnswer,
-  payload: id
-});
+export const setActiveAnswer = createAction(Actions.setActiveAnswer);
 
-export const resetActiveAnswer = () => ({
-  type: Actions.resetActiveAnswer
-});
+export const resetActiveAnswer = createAction(Actions.resetActiveAnswer);

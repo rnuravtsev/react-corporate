@@ -1,18 +1,18 @@
-import { Header } from './components/Header/Header';
 import './App.css';
 import 'normalize.css/normalize.css';
-import { Footer } from "./components/Footer/Footer";
-import { Main } from "./components/Main/Main";
-import { withMainContext } from "./providers/withMainContext";
+import { Main } from './components/Main/Main';
+import { withMainContext } from './providers/withMainContext';
+import { Provider } from 'react-redux';
+import store from "./store/store";
 
 const AppPageContent = () => (
-  <div className="app">
-    <div className="container">
-      {/*<Header />*/}
-      <Main />
-      {/*<Footer />*/}
+  <Provider store={store}>
+    <div className="app">
+      <div className="container">
+        <Main />
+      </div>
     </div>
-  </div>
+  </Provider>
 );
 
-export default  withMainContext(AppPageContent);
+export default withMainContext(AppPageContent);
