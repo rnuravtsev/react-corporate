@@ -1,9 +1,8 @@
 import './App.css';
 import 'normalize.css/normalize.css';
 import { Main } from './components/Main/Main';
-import { withMainContext } from './providers/withMainContext';
 import { Provider } from 'react-redux';
-import store from "./store/store";
+import store from "./ducks/store";
 
 const AppPageContent = () => (
   <Provider store={store}>
@@ -15,4 +14,4 @@ const AppPageContent = () => (
   </Provider>
 );
 
-export default withMainContext(AppPageContent);
+export default AppPageContent;

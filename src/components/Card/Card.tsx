@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Card.css';
 import Answers from '../Answers/Answers';
-import { MainContext } from '../../providers/withMainContext';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   increaseQuestionNumber,
-  resetActiveAnswer,
   setCorrectAnswer,
-} from '../../store/actions';
+  resetActiveAnswerId,
+} from '../../ducks/slices/quizSlice';
 import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
 import { Result } from '../Result/Result';
 import { TQuestion } from '../../types';
@@ -14,6 +14,7 @@ import axios from 'axios';
 import { debounce } from '../../debounce';
 import Loader from '../Loader/Loader';
 import classNames from 'classnames';
+import { IQuizState } from '../../ducks/slices/quizSlice';
 
 export const Card = () => {
   const [question, setQuestion] = useState<TQuestion>();
@@ -21,12 +22,15 @@ export const Card = () => {
   const [finishClicked, setFinishClicked] = useState(false);
   const [isQuestionLoading, setIsQuestionLoading] = useState(true);
 
-  const { state, dispatch } = useContext(MainContext);
-  const { questionId, activeAnswerId } = state;
+  const questionId = useSelector((state: IQuizState) => state.quiz.questionId);
+  const activeAnswerId = useSelector(
+    (state: IQuizState) => state.quiz.activeAnswerId
+  );
+  const dispatch = useDispatch();
 
   const onDocumentClick = () => {
     dispatch(increaseQuestionNumber());
-    dispatch(resetActiveAnswer());
+    dispatch(resetActiveAnswerId());
   };
 
   useEffect(() => {
@@ -91,7 +95,7 @@ export const Card = () => {
   const onButtonClick = () => {
     if (questionId < MAX_NUMBER_QUESTIONS) {
       dispatch(increaseQuestionNumber());
-      dispatch(resetActiveAnswer());
+      dispatch(resetActiveAnswerId());
     } else {
       setFinishClicked(true);
     }

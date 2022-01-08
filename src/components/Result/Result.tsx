@@ -1,13 +1,14 @@
-import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
+import { useSelector } from 'react-redux';
 import { useFetchResult } from '../../hooks/useFetchResult';
-import { useContext } from 'react';
-import { MainContext } from '../../providers/withMainContext';
-import {ReactComponent} from "../../images/refresh.svg";
+import { API, MAX_NUMBER_QUESTIONS } from '../../consts';
+import { IQuizState } from '../../ducks/slices/quizSlice';
+import { ReactComponent } from '../../images/refresh.svg';
 import './Result.css';
 
 export const Result = () => {
-  const { state } = useContext(MainContext);
-  const { numberOfCorrectAnswers } = state;
+  const numberOfCorrectAnswers = useSelector(
+    (state: IQuizState) => state.quiz.numberOfCorrectAnswers
+  );
 
   const fetchResponse = useFetchResult(API.postResult, numberOfCorrectAnswers);
 
@@ -30,7 +31,7 @@ export const Result = () => {
               </div>
             </div>
             <a className="result__refresh" href="/">
-              <ReactComponent className="result__icon" width={20} height={20}/>
+              <ReactComponent className="result__icon" width={20} height={20} />
               Повторить
             </a>
           </div>

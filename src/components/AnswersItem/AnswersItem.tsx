@@ -1,30 +1,33 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {ReactComponent as CheckmarkIcon} from '../../images/checkmark.svg';
-import {ReactComponent as CrossIcon} from '../../images/cross.svg';
+import React, { useEffect, useState } from 'react';
+import { ReactComponent as CheckmarkIcon } from '../../images/checkmark.svg';
+import { ReactComponent as CrossIcon } from '../../images/cross.svg';
 import classNames from 'classnames';
-import {TAnswer} from '../../types';
-import {MainContext} from '../../providers/withMainContext';
-import {setActiveAnswer} from '../../store/actions';
-import {debounce} from "../../debounce";
+import { TAnswer } from '../../types';
+import { useSelector, useDispatch } from 'react-redux';
+import { IQuizState, setActiveAnswerId } from '../../ducks/slices/quizSlice';
+import { debounce } from '../../debounce';
 
 const AnswersItem: React.FC<TAnswer> = ({
-                                          id: answerId,
-                                          isCorrect,
-                                          text,
-                                          comment,
-                                          percent,
-                                        }) => {
+  id: answerId,
+  isCorrect,
+  text,
+  comment,
+  percent,
+}) => {
   const [selected, setSelected] = useState<boolean>(false);
-  const {state, dispatch} = useContext(MainContext);
 
-  const {questionId, activeAnswerId} = state;
+  const questionId = useSelector((state: IQuizState) => state.quiz.questionId);
+  const activeAnswerId = useSelector(
+    (state: IQuizState) => state.quiz.activeAnswerId
+  );
+  const dispatch = useDispatch();
 
   const currentAnswer = answerId === activeAnswerId;
 
   useEffect(() => () => setSelected(false), [questionId]);
 
   const onButtonClick = () => {
-    dispatch(setActiveAnswer(answerId));
+    dispatch(setActiveAnswerId(answerId));
     setSelected(true);
   };
 
@@ -37,7 +40,7 @@ const AnswersItem: React.FC<TAnswer> = ({
           height={20}
         />
         {percent || '0'}%
-    </span>
+      </span>
     );
   };
 
@@ -45,8 +48,7 @@ const AnswersItem: React.FC<TAnswer> = ({
     if (selected && currentAnswer) {
       return (
         <>
-          {isCorrect === false
-            ? (
+          {isCorrect === false ? (
             <span className="answers__percentage">
               <CrossIcon
                 className="answers__icon answers__icon_cross"
@@ -55,11 +57,9 @@ const AnswersItem: React.FC<TAnswer> = ({
               />
               {percent}%
             </span>
-          )
-          : isCorrect === true
-          ? renderCheckmarkPercent(percent)
-          : null
-          }
+          ) : isCorrect === true ? (
+            renderCheckmarkPercent(percent)
+          ) : null}
         </>
       );
     }
@@ -78,10 +78,10 @@ const AnswersItem: React.FC<TAnswer> = ({
     <li
       className={classNames(
         'answers__item',
-        {answers__item_unselected: activeAnswerId && !selected},
-        {answers__item_selected: currentAnswer && selected},
-        {answers__item_correct: activeAnswerId && isCorrect},
-        {answers__item_wrong: currentAnswer && isCorrect === false}
+        { answers__item_unselected: activeAnswerId && !selected },
+        { answers__item_selected: currentAnswer && selected },
+        { answers__item_correct: activeAnswerId && isCorrect },
+        { answers__item_wrong: currentAnswer && isCorrect === false }
       )}
     >
       {renderPercentage()}
