@@ -10,7 +10,7 @@ export const Result = () => {
     (state: IQuizState) => state.quiz.numberOfCorrectAnswers
   );
 
-  const fetchResponse = useFetchResult(API.postResult, numberOfCorrectAnswers);
+  const fetchResponse = useFetchResult(API.getResult, numberOfCorrectAnswers);
 
   const { data, isLoading } = fetchResponse;
 

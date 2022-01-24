@@ -4,7 +4,7 @@ import { ReactComponent as CrossIcon } from '../../images/cross.svg';
 import classNames from 'classnames';
 import { TAnswer } from '../../types';
 import { useSelector, useDispatch } from 'react-redux';
-import { IQuizState, setActiveAnswerId } from '../../ducks/slices/quizSlice';
+import {IQuizState, postQuestion, setActiveAnswerId} from '../../ducks/slices/quizSlice';
 import { debounce } from '../../debounce';
 
 const AnswersItem: React.FC<TAnswer> = ({
@@ -15,12 +15,10 @@ const AnswersItem: React.FC<TAnswer> = ({
   percent,
 }) => {
   const [selected, setSelected] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const questionId = useSelector((state: IQuizState) => state.quiz.questionId);
-  const activeAnswerId = useSelector(
-    (state: IQuizState) => state.quiz.activeAnswerId
-  );
-  const dispatch = useDispatch();
+  const activeAnswerId = useSelector((state: IQuizState) => state.quiz.activeAnswerId);
 
   const currentAnswer = answerId === activeAnswerId;
 
@@ -28,6 +26,7 @@ const AnswersItem: React.FC<TAnswer> = ({
 
   const onButtonClick = () => {
     dispatch(setActiveAnswerId(answerId));
+    dispatch(postQuestion({ questionId, answerId }));
     setSelected(true);
   };
 

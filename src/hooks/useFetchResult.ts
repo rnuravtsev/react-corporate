@@ -1,6 +1,6 @@
-import {useState, useEffect} from "react";
-import { TResult } from "../types";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import { TResult } from '../types';
+import axios from 'axios';
 
 export const useFetchResult = (url: string, correctAnswersCounter: number) => {
   const [data, setData] = useState<TResult>();
@@ -11,8 +11,8 @@ export const useFetchResult = (url: string, correctAnswersCounter: number) => {
       try {
         const response = await axios.get<TResult>(url, {
           params: {
-            correctAnswersCounter
-          }
+            correctAnswersCounter,
+          },
         });
         setData(response.data);
         setIsLoading(false);
@@ -20,14 +20,12 @@ export const useFetchResult = (url: string, correctAnswersCounter: number) => {
         alert(err);
         setIsLoading(false);
       }
-
     };
 
     fetchData();
 
     return () => setIsLoading(true);
-
   }, [correctAnswersCounter]);
 
-  return {data, isLoading};
+  return { data, isLoading };
 };
