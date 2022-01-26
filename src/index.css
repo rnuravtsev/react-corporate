@@ -30,3 +30,34 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.btn {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 90%;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: var(--button-next-bg-color);
+  border: 1px solid var(--button-next-bg-color);
+  border-radius: 0.5rem;
+  transition: all .25s ease;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn:active {
+  box-shadow: 0 0 0 2px var(--button-next-bg-color);
+}
+

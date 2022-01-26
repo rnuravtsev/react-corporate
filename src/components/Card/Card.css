@@ -24,25 +24,6 @@
   margin-bottom: 2rem;
 }
 
-.card__button {
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.5rem;
-  display: block;
-  width: 100%;
-  max-width: 90%;
-  color: #ffffff;
-  font-size: 14px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  text-transform: uppercase;
-  background-color: var(--button-next-bg-color);
-  border: 1px solid var(--button-next-bg-color);
-  border-radius: 0.5rem;
-  transition: all .25s ease;
-  cursor: pointer;
-}
-
 .card__button--loading {
   background-color: var(--disabled-color);
   border: 1px solid var(--disabled-color);
