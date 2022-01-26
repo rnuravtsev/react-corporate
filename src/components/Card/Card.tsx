@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Card.css';
 import Answers from '../Answers/Answers';
 import { Link } from 'react-router-dom';
@@ -6,8 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   increaseQuestionNumber,
   resetActiveAnswerId,
-  fetchQuestion,
-  getResult,
 } from '../../ducks/slices/quizSlice';
 import { MAX_NUMBER_QUESTIONS, ROUTES } from '../../consts';
 import Loader from '../Loader/Loader';
@@ -16,23 +14,17 @@ import { IQuizState } from '../../ducks/slices/quizSlice';
 import { debounce } from '../../debounce';
 
 export const Card = () => {
-  const question = useSelector((state: IQuizState) => state.quiz.question);
+  const questions = useSelector((state: IQuizState) => state.quiz.questions);
   const questionId = useSelector((state: IQuizState) => state.quiz.questionId);
   const activeAnswerId = useSelector(
     (state: IQuizState) => state.quiz.activeAnswerId
   );
-  const numberOfCorrectAnswers = useSelector(
-    (state: IQuizState) => state.quiz.numberOfCorrectAnswers
-  );
   const isQuestionLoading = useSelector(
     (state: IQuizState) => state.quiz.loading
   );
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchQuestion(questionId));
-  }, [questionId]);
+  const matchQuestion = questions.find((el) => el.id === questionId);
 
   const onButtonClick = () => {
     dispatch(increaseQuestionNumber());
@@ -44,9 +36,9 @@ export const Card = () => {
         <div className="card__number">
           {questionId}/{MAX_NUMBER_QUESTIONS}
         </div>
-        <h3 className="card__title">{question?.title}</h3>
+        <h3 className="card__title">{matchQuestion?.title}</h3>
         <div className="card__answers">
-          <Answers answers={question?.answers} />
+          <Answers answers={matchQuestion?.answers} />
         </div>
         {!isQuestionLoading ? (
           questionId < MAX_NUMBER_QUESTIONS ? (

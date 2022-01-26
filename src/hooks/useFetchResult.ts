@@ -25,7 +25,7 @@ export const useFetchResult = (url: string, correctAnswersCounter: number) => {
     fetchData();
 
     return () => setIsLoading(true);
-  }, [correctAnswersCounter]);
+  }, [url, correctAnswersCounter]);
 
   return { data, isLoading };
 };

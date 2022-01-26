@@ -3,24 +3,8 @@ import { TQuestion } from '../../types';
 import axios from 'axios';
 import { API } from '../../consts';
 
-export const fetchQuestion = createAsyncThunk(
-  'quiz/fetchQuestion',
-  async (questionId: number, { rejectWithValue }) => {
-    try {
-      const response = await axios({
-        method: 'get',
-        url: API.getQuestion,
-        params: { questionId },
-      });
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  }
-);
-
-export const postQuestion = createAsyncThunk(
-  'quiz/postQuestion',
+export const getQuestion = createAsyncThunk(
+  'quiz/getQuestion',
   async (
     data: { questionId: number; answerId: number },
     { rejectWithValue, dispatch }
@@ -64,7 +48,7 @@ export const getResult = createAsyncThunk(
 
 export interface IQuizState {
   quiz: {
-    question: TQuestion;
+    questions: TQuestion[];
     questionId: number;
     numberOfCorrectAnswers: number;
     activeAnswerId: null | number;
@@ -74,7 +58,7 @@ export interface IQuizState {
 }
 
 const initialState = {
-  question: {},
+  questions: [],
   questionId: 1,
   numberOfCorrectAnswers: 0,
   activeAnswerId: null,
@@ -86,17 +70,8 @@ const quizSlice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    startFetching(state) {
-      state.loading = true;
-    },
-    endFetching(state) {
-      state.loading = false;
-    },
-    setError(state, action) {
-      state.error = action.payload;
-    },
-    setQuestions(state, action) {
-      state.question = action.payload;
+    setAllQuestions(state, action) {
+      state.questions = action.payload;
     },
     increaseQuestionNumber(state) {
       state.questionId += 1;
@@ -112,28 +87,13 @@ const quizSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchQuestion.fulfilled, (state, action) => {
+    builder.addCase(getQuestion.fulfilled, (state) => {
       state.loading = false;
-      state.question = action.payload;
     });
-    builder.addCase(fetchQuestion.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(fetchQuestion.rejected, (state, action) => {
-      state.loading = false;
-      // TODO: Разобраться с типом
-      // @ts-ignore
-      state.error = action.payload;
-    });
-    builder.addCase(postQuestion.fulfilled, (state, action) => {
-      state.loading = false;
-      state.question = action.payload;
-    });
-    builder.addCase(postQuestion.pending, (state) => {
+    builder.addCase(getQuestion.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(postQuestion.rejected, (state, action) => {
+    builder.addCase(getQuestion.rejected, (state, action) => {
       state.loading = false;
       // TODO: Разобраться с типом
       // @ts-ignore
@@ -162,6 +122,7 @@ export const {
   setCorrectAnswer,
   setActiveAnswerId,
   resetActiveAnswerId,
+  setAllQuestions
 } = actions;
 
 export default reducer;
