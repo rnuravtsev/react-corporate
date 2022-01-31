@@ -17,3 +17,6 @@ export enum APILOCAL {
   postAnswer = 'http://localhost:8080/api/question',
   postResult = 'http://localhost:8080/api/result',
 }
+
+//test fetch-p
+const test = 'fetch-p';
